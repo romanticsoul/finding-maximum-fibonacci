@@ -1,0 +1,18 @@
+{
+  "name": "fibonacci",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "bun --hot run index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@types/cli-progress": "^3.11.5",
+    "cli-progress": "^3.12.0"
+  }
+}
