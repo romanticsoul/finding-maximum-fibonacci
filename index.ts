@@ -1,7 +1,8 @@
 import cliProgress from "cli-progress";
 const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
 
-const itrCount = 20000; /* Введите количество итераций */
+const itrCount = 200000; /* Введите количество итераций */
+
 /* Вычисления с использованием BigInt */
 function fibonacci(n: number, cache: Record<number, bigint> = {}): bigint {
   if (n <= 1) {
