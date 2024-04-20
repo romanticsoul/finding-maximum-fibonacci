@@ -1,37 +1,53 @@
-import cliProgress from "cli-progress";
-const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+import Decimal from "decimal.js";
 
-const itrCount = 20000; /* Введите количество итераций */
-/* Вычисления с использованием BigInt */
-function fibonacci(n: number, cache: Record<number, bigint> = {}): bigint {
-  if (n <= 1) {
-    return BigInt(n);
-  }
-  if (cache[n]) {
-    return cache[n];
-  }
-  return (cache[n] = fibonacci(n - 1, cache) + fibonacci(n - 2, cache));
+function Bine(n: number) {
+  const root5 = new Decimal(5).sqrt();
+  const phi = root5.plus(1).dividedBy(2);
+  return phi.pow(n).minus(phi.negated().pow(-n)).dividedBy(root5);
 }
 
-const cache: Record<number, bigint> = {};
+/**
+ * Похоже, это максимальное число Фибоначчи,
+ * которое можно вычислить с помощью библиотеки Decimal.js
+ */
+console.log(Bine(43064747701034996));
 
-bar.start(itrCount, 1);
+/* Старый код */
+// import cliProgress from "cli-progress";
+// const bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
 
-for (let i = 0; i < itrCount; i++) {
-  const child: bigint = fibonacci(i - 1, cache);
-  const grandchild: bigint = fibonacci(i - 2, cache);
-  const current: bigint = fibonacci(i, cache);
+// const itrCount = 2000000; /* Введите количество итераций */
 
-  if (i > 10) {
-    if (grandchild + child - current === BigInt(0)) {
-      bar.update(++i);
-    } else {
-      bar.stop();
-      console.error(`Ошибка вычисления ${i} числа Фибоначчи`);
-      break;
-    }
-  }
-}
+// /* Вычисления с использованием BigInt */
+// function fibonacci(n: number, cache: Record<number, bigint> = {}): bigint {
+//   if (n <= 1) {
+//     return BigInt(n);
+//   }
+//   if (cache[n]) {
+//     return cache[n];
+//   }
+//   return (cache[n] = fibonacci(n - 1, cache) + fibonacci(n - 2, cache));
+// }
+
+// const cache: Record<number, bigint> = {};
+
+// bar.start(itrCount, 1);
+
+// for (let i = 0; i < itrCount; i++) {
+//   const child: bigint = fibonacci(i - 1, cache);
+//   const grandchild: bigint = fibonacci(i - 2, cache);
+//   const current: bigint = fibonacci(i, cache);
+
+//   if (i > 10) {
+//     if (grandchild + child - current === BigInt(0)) {
+//       bar.update(++i);
+//     } else {
+//       bar.stop();
+//       console.error(`Ошибка вычисления ${i} числа Фибоначчи`);
+//       break;
+//     }
+//   }
+// }
 
 /* Вычисления с использованием Number */
 // function fibonacci(n: number, cache: Record<number, number> = {}): number {
@@ -64,4 +80,4 @@ for (let i = 0; i < itrCount; i++) {
 //   }
 // }
 
-bar.stop();
+// bar.stop();
