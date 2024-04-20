@@ -1,16 +1,13 @@
 import Decimal from "decimal.js";
 
 function Bine(n: number) {
-  const root5 = new Decimal(5).sqrt();
-  const phi = root5.plus(1).dividedBy(2);
-  return phi.pow(n).minus(phi.negated().pow(-n)).dividedBy(root5);
+  Decimal.set({ precision: 10000 }); /* Количество нулей после запятой */
+  const root5 = new Decimal(5).sqrt(); /* 2.2360679774997896964 */
+  const phi = root5.plus(1).dividedBy(2); /* 1.6180339887498948482 */
+  return phi.pow(n).minus(phi.pow(-n)).dividedBy(root5).round();
 }
 
-/**
- * Похоже, это максимальное число Фибоначчи,
- * которое можно вычислить с помощью библиотеки Decimal.js
- */
-console.log(Bine(43064747701034996));
+console.log(Bine(100));
 
 /* Старый код */
 // import cliProgress from "cli-progress";
